@@ -1,4 +1,6 @@
 title: Deathmatch Pack
+description: Pack for quick deployments of DOOM deathmatch games
 author: jaezudev
+show_downloads: true
 
 theme: jekyll-theme-cayman
