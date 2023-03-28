@@ -59,7 +59,7 @@ Function screenName
 	${If} $Dialog == error
 		Abort
 	${EndIf}
-	${NSD_CreateLabel} 0 0 100% 12u "This is the name other players see whilst participating in multiplayer matches and when you send messages in the chat."
+	${NSD_CreateLabel} 0 0 100% 24u "This is the name other players see whilst participating in multiplayer matches and when you send messages in the chat."
 	Pop $Label
 	${NSD_CreateText} 0 37u 100% 12u "Player"
 	Pop $Text
