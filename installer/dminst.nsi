@@ -8,7 +8,7 @@
 !include LogicLib.nsh
 
 Name "Deathmatch Pack"
-OutFile "dm_inst.exe"
+OutFile "dm-setup.exe"
 Unicode True
 InstallDir "H:\Apps\Deathmatch"
 RequestExecutionLevel user
@@ -35,7 +35,7 @@ Var DoomName
 !insertmacro MUI_PAGE_LICENSE "license.txt"
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
-Page custom nsDialogsPage nsDialogsPageLeave
+Page custom screenName screenNameLeave
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
@@ -52,21 +52,21 @@ Page custom nsDialogsPage nsDialogsPageLeave
 ;================================================================
 ; Username
 
-Function nsDialogsPage
-	!insertmacro MUI_HEADER_TEXT "Enter Name" "Define your Doom screen name."
+Function screenName
+	!insertmacro MUI_HEADER_TEXT "Enter Name" "Enter your Doom screen name."
 	nsDialogs::Create 1018
 	Pop $Dialog
 	${If} $Dialog == error
 		Abort
 	${EndIf}
-	${NSD_CreateLabel} 0 0 100% 12u "This is the name other players see whilst in network matches and in the chat."
+	${NSD_CreateLabel} 0 0 100% 12u "This is the name other players see whilst participating in multiplayer matches and when you send messages in the chat."
 	Pop $Label
-	${NSD_CreateText} 0 49u 100% 12u "Player"
+	${NSD_CreateText} 0 37u 100% 12u "Player"
 	Pop $Text
 	nsDialogs::Show
 FunctionEnd
 
-Function nsDialogsPageLeave
+Function screenNameLeave
 	${NSD_GetText} $Text $0
 	${If} $0 == ""
 		StrCpy $0 "Player"
@@ -75,9 +75,9 @@ Function nsDialogsPageLeave
 FunctionEnd
 
 ;================================================================
-; Installer
+; Installer Sections
 
-Section "Base Application" SecBase
+Section "Deathmatch Pack Base" SecBase
 	SectionIn RO
 	SetOutPath $INSTDIR
 	File /a files\freedm.wad
@@ -99,15 +99,15 @@ SectionEnd
 
 Section "Create Shortcuts" SecLnk
 	SetOutPath $INSTDIR
-	CreateShortCut "$DESKTOP\Host Deathmatch Game.lnk" $OUTDIR\game_host.bat
-	CreateShortCut "$DESKTOP\Join Deathmatch Game.lnk" $OUTDIR\game_join.bat
+	CreateShortCut "$DESKTOP\Host Deathmatch Game.lnk" $OUTDIR\game_host.bat "" "C:\Windows\System32\shell32.dll" 176
+	CreateShortCut "$DESKTOP\Join Deathmatch Game.lnk" $OUTDIR\game_join.bat "" "C:\Windows\System32\shell32.dll" 172
 SectionEnd
 
 ;================================================================
-; Component stuff
+; Component description stuff
 
-LangString DESC_SecBase ${LANG_ENGLISH} "The base components (required)."
-LangString DESC_SecLnk ${LANG_ENGLISH} "Create shortcuts on desktop."
+LangString DESC_SecBase ${LANG_ENGLISH} "Deathmatch pack. (required)"
+LangString DESC_SecLnk ${LANG_ENGLISH} "Create shortcuts on the desktop for quick access."
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 	!insertmacro MUI_DESCRIPTION_TEXT ${SecBase} $(DESC_SecBase)
