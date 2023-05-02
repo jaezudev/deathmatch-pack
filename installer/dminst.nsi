@@ -99,8 +99,8 @@ SectionEnd
 
 Section "Create Shortcuts" SecLnk
 	SetOutPath $INSTDIR
-	CreateShortCut "$DESKTOP\Host Deathmatch Game.lnk" $OUTDIR\game_host.bat "" "C:\Windows\System32\shell32.dll" 176
-	CreateShortCut "$DESKTOP\Join Deathmatch Game.lnk" $OUTDIR\game_join.bat "" "C:\Windows\System32\shell32.dll" 172
+	CreateShortCut "$DESKTOP\Host Deathmatch Game.lnk" $OUTDIR\game_host.bat "" "C:\Windows\System32\shell32.dll" 15
+	CreateShortCut "$DESKTOP\Join Deathmatch Game.lnk" $OUTDIR\game_join.bat "" "C:\Windows\System32\shell32.dll" 17
 SectionEnd
 
 ;================================================================
